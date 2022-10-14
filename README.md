@@ -21,3 +21,4 @@ npm 8.1.0
 ````
  npm run start
 ````
+![Recording 2022-10-14 at 12 30 54](https://user-images.githubusercontent.com/19413241/195884777-157e326f-3d3a-4317-adb8-e49577bd513e.gif)

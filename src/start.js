@@ -34,10 +34,23 @@ function init() {
 
   container.appendChild(renderer.domElement);
 
+  // Textura
+  var textureLoader = new THREE.TextureLoader();
+  var texture = textureLoader.load( './Arm_empelium/textures/empelium_01.bmp' );
+  texture.flipY = false;
   //Load Model
   let loader = new THREE.GLTFLoader();
   loader.load("./Arm_empelium/emperio.gltf", function(gltf) {
-    scene.add(gltf.scene);
+    var model = gltf.scene;
+    model.traverse ( ( o ) => {
+      if ( o.isMesh ) {
+        // note: for a multi-material mesh, `o.material` may be an array,
+        // in which case you'd need to set `.map` on each value.
+        o.material.map = texture;
+      }
+    } );
+
+    scene.add(model);
     Arm_empelium = gltf.scene.children[0];
     Arm_empelium.rotation.x += 80;
     animate();

@@ -1,4 +1,4 @@
-# Convert_gr2_to_gltf
+# Gr2 teste
 
 #### Tool used
 [blender](https://www.blender.org/)

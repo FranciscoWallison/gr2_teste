@@ -1,26 +1,170 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="en-AU">
+<head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
-  </head>
-  <body>
-    <form action="#" id="form" style="margin-top: 40px;margin-left: 40px;">
-      <label for="object">Select object:</label>
-      <select name="object" id="object">
-      </select>
-      <br><br>
-    </form>
 
-    <div class="scene"></div>
-    <script src="./three.min.js"></script>
-    <script src="./GLTFLoader.js"></script>
-    <script src="./getFiles.js"></script>
-    <script src="./start.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+   
+     <style>
+
+        * {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 350;
+        }
+            
+        html {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        body {
+            margin: 0;
+            flex-grow: 1;
+            overflow: hidden;
+            line-height: 1.5;
+            text-align: center;
+            background: linear-gradient(155deg, #000 20%, #222);
+            color:  #fff;
+        }
+
+        #threejs-canvas {
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        [loaded] #threejs-canvas {
+            opacity: 1;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="./_css/loader.css">
+    <link rel="stylesheet" href="./_css/fullscreen-button.css">
+    <link rel="stylesheet" href="./_css/range-slider.css">
+    <link rel="stylesheet" href="./_css/input-buttons.css">
+    <link rel="stylesheet" href="./_css/controls.css">
+
+</head>
+
+<body> 
+
+   <div id="threejs-canvas" class="screen"></div>
+
+    <div id="loader">
+        <!-- <div class="cube-animation">
+            <div class="cube">
+                <div class="front"><span></span></div>
+                <div class="back"><span></span></div>
+                <div class="top"><span></span></div>
+                <div class="bottom"><span></span></div>
+                <div class="left"><span></span></div>
+                <div class="right"><span></span></div>
+            </div>
+        </div> -->
+        <p>{ loading }</p>
+    </div>
+
+    <script> 
+        setTimeout( () => {
+            if (!document.body.hasAttribute("loaded")) { 
+                document.body.setAttribute("loading","")
+            } 
+        }, 1000)
+    </script>
+
+
+
+    <div id="controls">
+
+        <label style="font-size: 7px;" lass="animation-speed-slider">Select object:
+            <select name="object" id="object" style="font-size: 8.5px;">
+            </select>
+            <br>
+        </label>
+
+        <hr>
+
+        <label for="animation-speed-slider">
+            Speed: <span id="animation-speed-value">1</span> 
+        </label> 
+
+        <div class="range-slider-container">
+            <div class="range-track"></div>
+            <div id="range-slider-1-track-highlight" class="range-track track-highlight"></div>
+            <input type="range" min="0" max="100" value="100" class="slider" id="animation-speed-slider">
+        </div>
+
+        
+        <div id="event" 
+            
+        >
+            <hr>
+            
+            <label class="custom-input-button">Skeleton
+                <input type="checkbox" id="skeleton-button">
+                <span class="checkmark"></span>
+            </label>
+
+            <hr>
+
+            <label id="animation-1" class="custom-input-button">Stop 
+                <input type="radio" id="animation-button-1" name="animation" checked="checked" >
+                <span class="radio-button"></span>
+            </label>
+
+
+
+            <label id="animation-2" class="custom-input-button">Attackout
+                <input type="radio" id="animation-button-2" name="animation">
+                <span class="radio-button"></span>
+            </label>
+
+
+
+            <label id="animation-3" class="custom-input-button">Damageout 
+                <input type="radio" id="animation-button-3" name="animation">
+                <span class="radio-button"></span>
+            </label>
+
+
+
+            <label id="animation-4" class="custom-input-button">Deadout 
+                <input type="radio" id="animation-button-4" name="animation">
+                <span class="radio-button"></span>
+            </label>
+
+            <label id="animation-5" class="custom-input-button">Moveout
+                <input type="radio" id="animation-button-5" name="animation">
+                <span class="radio-button"></span>
+            </label>
+        </div>
+
+    </div>
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
     
-    <!-- <script type="module" src="./start_liquidbugFBXL.js"></script> -->
-  </body>
+        
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../build/three.module.js",
+                "three/addons/": "./jsm/"
+            }
+        }
+    </script>
+
+    <script type="module" src="./start_fbx.js"></script>
+
+
+</body>
+
 </html>

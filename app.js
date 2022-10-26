@@ -10,15 +10,6 @@ app.get("/",(req, res) =>{
     res.sendFile(__dirname + "/src/index.html")
 } )
 
-app.get("/gr",(req, res) =>{
-    res.sendFile(__dirname + "/gr2-web/index.html")
-} )
-
-
-app.get("/grep",(req, res) =>{
-    res.sendFile(__dirname + "/gr2-web/index_emperio.html")
-} )
-
 
 var fsp = require("fs").promises;
 
@@ -34,12 +25,13 @@ async function listarArquivosDoDiretorio(diretorio, arquivos) {
     }
     let listaDeArquivos = await fsp.readdir(diretorio);
     for(let k in listaDeArquivos) {
+    
         let stat = await fsp.stat(diretorio + '/' + listaDeArquivos[k]);
         if(stat.isDirectory()){
             await listarArquivosDoDiretorio(diretorio + '/' + listaDeArquivos[k], arquivos);
         }
         else{
-            if(listaDeArquivos[k].indexOf(".gltf") != -1){
+            if(listaDeArquivos[k].indexOf(".fbx") != -1){
 
                 let object = {
                     name_file: "",
@@ -50,14 +42,14 @@ async function listarArquivosDoDiretorio(diretorio, arquivos) {
                 object.rotation_x = 0;
             
                 if (listaDeArquivos[k].indexOf("empelium") != -1) {
-                    object.rotation_x =  3
+                    object.rotation_x =  1.6
                 }
                 if (listaDeArquivos[k].indexOf("guardian") != -1) {
-                    object.rotation_x =  5
+                    object.rotation_x =  1.6
                 }
 
                 if (listaDeArquivos[k].indexOf("guild") != -1) {
-                    object.rotation_x =  1
+                    object.rotation_x =  1.6
                 }
 
                 arquivos.push(object);

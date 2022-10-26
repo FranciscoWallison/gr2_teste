@@ -1,0 +1,93 @@
+
+
+/* Fullscreen Button 
+------------------------------*/
+
+#fullscreen-button {
+	position: absolute;
+	top:  15px;
+	right:  15px;
+	background: rgba(255,255,255,0);
+	border:  0;
+	width:  40px;
+	height:  40px;
+	border-radius: 50%;
+	box-sizing: border-box;
+	transition:  transform .3s, opacity .3s;
+	font-size: 0;
+	cursor:  pointer;
+	opacity: 0;
+	pointer-events: none;
+}
+
+[ui] #fullscreen-button {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+#fullscreen-button:hover {
+	transform: scale(1.125);
+}
+
+#fullscreen-button span {
+	width:  4px;
+	height:  4px;
+	border-top:  2.5px solid #fff;
+	border-left:  2.5px solid #fff;
+	position: absolute;
+	outline: 1px solid transparent;
+	-webkit-backface-visibility: hidden;
+	transform: translateZ(0);
+	will-change: transform;
+	-webkit-perspective: 1000;
+	transition:  .3s;
+	transition-delay: .75s;
+}
+
+#fullscreen-button span:nth-child(1) {
+	top: 11px;
+	left: 11px;
+}
+
+#fullscreen-button span:nth-child(2) {
+	top: 11px;
+	left: 22px;
+	transform: rotate(90deg);
+}
+
+#fullscreen-button span:nth-child(3) {
+	top: 22px;
+	left: 11px;
+	transform: rotate(-90deg);
+}
+
+#fullscreen-button span:nth-child(4) {
+	top: 22px;
+	left: 22px;
+	transform: rotate(-180deg);
+}
+
+
+/* Fullscreen True
+------------------------------*/
+
+[fullscreen] #fullscreen-button span:nth-child(1) {
+	top: 22px;
+	left: 22px;
+}
+
+[fullscreen] #fullscreen-button span:nth-child(2) {
+	top: 22px;
+	left: 11px;
+}
+
+[fullscreen] #fullscreen-button span:nth-child(3) {
+	top: 11px;
+	left: 22px;
+}
+
+[fullscreen] #fullscreen-button span:nth-child(4) {
+	top: 11px;
+	left: 11px;
+}
+

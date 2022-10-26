@@ -1,0 +1,58 @@
+
+
+/* Controls 
+------------------------------*/
+
+#controls {
+    width:  100px;
+    position: absolute;
+    bottom:  15px;
+    right:  -50px;
+    padding:  10px;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    font-size: .688em;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color:  #fff;
+    transition: right .2s, opacity .2s;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+[ui] #controls{
+    right:  10px;
+    display: inline-block;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+
+@media only screen and (min-width: 1400px) {
+    #controls {
+        width:  120px;
+        font-size: .813em;
+    }
+    .checkmark,
+    .radio-button {
+        top:  3.5px;
+    }
+}
+
+#controls hr {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, .2);
+}
+
+
+
+
+
+
+
+

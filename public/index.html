@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+
+    <link rel="stylesheet" href="./_css/loader.css">
+    <link rel="stylesheet" href="./_css/fullscreen-button.css">
+    <link rel="stylesheet" href="./_css/range-slider.css">
+    <link rel="stylesheet" href="./_css/input-buttons.css">
+    <link rel="stylesheet" href="./_css/controls.css">
+
+    <link rel="stylesheet" href="./_css/main.css">
+
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+
+    
+    <div id="threejs-canvas" class="screen"></div>
+
+    <div id="controls">
+
+      <label style="font-size: 7px;" lass="animation-speed-slider">Select object:
+          <select name="object" id="object" style="font-size: 8.5px;">
+          </select>
+          <br/>
+      </label>
+      
+      <hr/>
+      
+      <label for="animation-speed-slider">
+          Speed: <span id="animation-speed-value">1</span> 
+      </label> 
+      
+      <div class="range-slider-container">
+          <div class="range-track"></div>
+          <div id="range-slider-1-track-highlight" class="range-track track-highlight"></div>
+          <input type="range" min="0" max="100" value="100" class="slider" id="animation-speed-slider"/>
+      </div>
+      
+      
+      <div id="event" 
+          
+      >
+          <hr/>
+          
+          <label class="custom-input-button">Skeleton
+              <input type="checkbox" id="skeleton-button"/>
+              <span class="checkmark"></span>
+          </label>
+      
+          <hr/>
+      
+          <label id="animation-1" class="custom-input-button">Stop 
+              <input type="radio" id="animation-button-1" name="animation" checked="checked" />
+              <span class="radio-button"></span>
+          </label>
+      
+      
+      
+          <label id="animation-2" class="custom-input-button">Attackout
+              <input type="radio" id="animation-button-2" name="animation"/>
+              <span class="radio-button"></span>
+          </label>
+      
+      
+      
+          <label id="animation-3" class="custom-input-button">Damageout 
+              <input type="radio" id="animation-button-3" name="animation"/>
+              <span class="radio-button"></span>
+          </label>
+      
+      
+      
+          <label id="animation-4" class="custom-input-button">Deadout 
+              <input type="radio" id="animation-button-4" name="animation"/>
+              <span class="radio-button"></span>
+          </label>
+      
+          <label id="animation-5" class="custom-input-button">Moveout
+              <input type="radio" id="animation-button-5" name="animation"/>
+              <span class="radio-button"></span>
+          </label>
+      </div>
+      
+      </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

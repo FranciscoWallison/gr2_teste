@@ -1,3 +1,120 @@
+// "./3dmob/aguardian90_8.fbx"
+import React, { Component } from 'react';
+// import ReactThreeFbxViewer from './rpx';
+
+// import * as THREE from 'three'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+// import Stats from 'three/examples/jsm/libs/stats.module'
+
+// const scene = new THREE.Scene()
+// scene.add(new THREE.AxesHelper(5))
+
+// const light = new THREE.PointLight()
+// light.position.set(0.8, 1.4, 1.0)
+// scene.add(light)
+
+// const ambientLight = new THREE.AmbientLight()
+// scene.add(ambientLight)
+
+// const camera = new THREE.PerspectiveCamera(
+//     75,
+//     window.innerWidth / window.innerHeight,
+//     0.1,
+//     1000
+// )
+// camera.position.set(10, 60, 60)
+
+// const renderer = new THREE.WebGLRenderer()
+// renderer.setSize(window.innerWidth, window.innerHeight)
+// document.body.appendChild(renderer.domElement)
+
+// const controls = new OrbitControls(camera, renderer.domElement)
+// controls.enableDamping = true
+// controls.target.set(0, 1, 0)
+
+// //const material = new THREE.MeshNormalMaterial()
+
+// const fbxLoader = new FBXLoader()
+// fbxLoader.load(
+//     './3dmob/aguardian90_8.fbx',
+//     (object) => {
+//         // object.traverse(function (child) {
+//         //     if ((child as THREE.Mesh).isMesh) {
+//         //         // (child as THREE.Mesh).material = material
+//         //         if ((child as THREE.Mesh).material) {
+//         //             ((child as THREE.Mesh).material as THREE.MeshBasicMaterial).transparent = false
+//         //         }
+//         //     }
+//         // })
+//         // object.scale.set(.01, .01, .01)
+
+//         const mixer = new THREE.AnimationMixer( object );
+//         const action_1 = mixer.clipAction( object.animations[0]);
+//         action_1.play();
+//         object.rotation.x = 4.6
+//         scene.add(object)
+//     },
+//     (xhr) => {
+//         console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+//     },
+//     (error) => {
+//         console.log(error)
+//     }
+// )
+
+// window.addEventListener('resize', onWindowResize, false)
+// function onWindowResize() {
+//     camera.aspect = window.innerWidth / window.innerHeight
+//     camera.updateProjectionMatrix()
+//     renderer.setSize(window.innerWidth, window.innerHeight)
+//     render()
+// }
+
+// const stats = Stats()
+// document.body.appendChild(stats.dom)
+
+// function animate() {
+//     requestAnimationFrame(animate)
+
+//     controls.update()
+
+//     render()
+
+//     stats.update()
+// }
+
+// function render() {
+//     renderer.render(scene, camera)
+// }
+
+// animate()
+
+// let fbxUrl = require('./3dmob/aguardian90_8.fbx');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+
+
+
+
 let scene, camera, renderer, controls;
 
 let clock, skeleton;
@@ -10,9 +127,7 @@ let mixer;
 window.NAME_FILE = "aguardian90_8.fbx";
 window.ROTATION_X = 1.6;
 
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+
 // import Stats from 'three/examples/jsm/libs/stats.module'
 
 
@@ -21,7 +136,7 @@ window.OrbitControls = OrbitControls;
 window.FBXLoader = FBXLoader;
 
 
-window.init = function () {
+function init () {
 
     if ( typeof window['THREE'] === 'undefined') {
         init()
@@ -108,19 +223,19 @@ window.init = function () {
         color: 0x000
     }));
 
-ground_mesh.receiveShadow = true;
+    ground_mesh.receiveShadow = true;
 
-ground_mesh.rotateX(-Math.PI / 2);
-scene.add(ground_mesh);
+    ground_mesh.rotateX(-Math.PI / 2);
+    scene.add(ground_mesh);
 
 
-// Load GLTF
+    // Load GLTF
 
-const fbx_loader = new FBXLoader();
-
+    const fbx_loader = new FBXLoader();
+debugger;
 fbx_loader.load( 
 
-    `./com_texture/3dmob/${window["NAME_FILE"]}`, function ( fbx ) {
+    `./3dmob/${window["NAME_FILE"]}`, function ( fbx ) {
 
         console.log( "Robot model with idle animation loaded" );
 
@@ -169,7 +284,7 @@ function load_animations() {
     let name_object =  window["NAME_FILE"].split(".fbx");
 
     // animation 2 attackout
-    fbx_loader.load( `./com_texture/3dmob_bone/${name_object[0].split("_")[1]}_attackout.fbx`, function ( fbx ) {                    
+    fbx_loader.load( `./3dmob_bone/${name_object[0].split("_")[1]}_attackout.fbx`, function ( fbx ) {                    
             action_2 = mixer.clipAction(fbx.animations[0]);
             actions.push(action_2);
             fbx.children[0].rotation.x += 4.7;
@@ -187,7 +302,7 @@ function load_animations() {
     );
     
     // animation 3 damageout
-    fbx_loader.load( `./com_texture/3dmob_bone/${name_object[0].split("_")[1]}_damageout.fbx`, function ( fbx ) {                    
+    fbx_loader.load( `./3dmob_bone/${name_object[0].split("_")[1]}_damageout.fbx`, function ( fbx ) {                    
             action_3 = mixer.clipAction(fbx.animations[0]);
             actions.push(action_3);
             fbx.children[0].rotation.x += 4.7;
@@ -205,7 +320,7 @@ function load_animations() {
     );
     
     // animation 4 deadout
-    fbx_loader.load( `./com_texture/3dmob_bone/${name_object[0].split("_")[1]}_deadout.fbx`, function ( fbx ) {                    
+    fbx_loader.load( `./3dmob_bone/${name_object[0].split("_")[1]}_deadout.fbx`, function ( fbx ) {                    
             action_4 = mixer.clipAction(fbx.animations[0]);
             actions.push(action_4);
             fbx.children[0].rotation.x += 4.7;
@@ -224,7 +339,7 @@ function load_animations() {
     
 
     // animation 5 moveout
-    fbx_loader.load( `./com_texture/3dmob_bone/${name_object[0].split("_")[1]}_moveout.fbx`, function ( fbx ) {                    
+    fbx_loader.load( `./3dmob_bone/${name_object[0].split("_")[1]}_moveout.fbx`, function ( fbx ) {                    
             action_5 = mixer.clipAction(fbx.animations[0]);
             actions.push(action_5);
             fbx.children[0].rotation.x += 4.7;
@@ -272,7 +387,7 @@ function activateAllActions() {
 }
 
 
-window.switchAction = function () {
+function switchAction () {
 
     if (newAction != currentAction) {
 
@@ -511,3 +626,15 @@ window.doSomething = function (params) {
 init();
 api();
 // });
+export default class App extends Component {
+
+  render () {
+    
+
+    return (
+      <div>
+    
+      </div>
+    );
+  }
+}

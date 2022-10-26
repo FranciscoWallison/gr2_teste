@@ -15,9 +15,9 @@
     window.ROTATION_X = 1.6;
 
 
-    import * as THREE from 'three'
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
     import { OrbitControls } from 'https://unpkg.com/three@0.139.0/examples/jsm/controls/OrbitControls.js'
-    import { FBXLoader } from 'three/addons/loaders/FBXLoader.js'
+    import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
 
     window.THREE = THREE; 
     window.OrbitControls = OrbitControls;
@@ -108,7 +108,7 @@
         const ground_mesh = new window['THREE'].Mesh(                                      
             new window['THREE'].PlaneGeometry(100, 100, 1, 1),
              new window['THREE'].MeshLambertMaterial({ 
-               color: 0x34349c47
+               color: 0x000
                }));  
 
         ground_mesh.receiveShadow = true;

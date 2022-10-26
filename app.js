@@ -73,4 +73,5 @@ app.get("/getitens", async (req, res) =>{
     res.json(await get_files())
 } )
 
-app.listen(3333, () => console.log('Server is running! http://localhost:3333'));
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));

@@ -138,18 +138,9 @@ window.FBXLoader = FBXLoader;
 
 function init () {
 
-    if ( typeof window['THREE'] === 'undefined') {
-        init()
-    }
-
     clock = new window['THREE'].Clock();
 
     scene = new window['THREE'].Scene();
-
-    const fov = 5;
-    const aspect = window.innerWidth / window.innerHeight;
-    const near = 0.1;
-    const far = 10000;
 
     //Camera setup
     camera = new window['THREE'].PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1,1000);
@@ -205,17 +196,8 @@ function init () {
     hemisphere_light_2.position.set( -6, 2, -8 );
     scene.add( hemisphere_light_2 );
 
-
-    // Materials
-
-    const shadow_material = new window['THREE'].ShadowMaterial( {
-        opacity: 0.15
-    });
-
-
     // Ground Plane
 
-    const ground_geometry = new window['THREE'].PlaneGeometry(20, 20);
     // const ground_mesh = new window['THREE'].Mesh(ground_geometry, shadow_material);
     const ground_mesh = new window['THREE'].Mesh(                                      
         new window['THREE'].PlaneGeometry(100, 100, 1, 1),
@@ -232,51 +214,51 @@ function init () {
     // Load GLTF
 
     const fbx_loader = new FBXLoader();
-debugger;
-fbx_loader.load( 
 
-    `./3dmob/${window["NAME_FILE"]}`, function ( fbx ) {
+    fbx_loader.load( 
 
-        console.log( "Robot model with idle animation loaded" );
+        `./3dmob/${window["NAME_FILE"]}`, function ( fbx ) {
 
-        const model = fbx;
-        model.rotation.y = Math.PI;
-        mixer = new window['THREE'].AnimationMixer( model );
-        mixers.push( mixer );
+            console.log( "Robot model with idle animation loaded" );
 
-        fbx.traverse((node) => {  
-            if (node.isMesh) node.frustumCulled = false;
-            if (node.isMesh) node.castShadow = true;
+            const model = fbx;
+            model.rotation.y = Math.PI;
+            mixer = new window['THREE'].AnimationMixer( model );
+            mixers.push( mixer );
 
-            if (node.isMesh) node.material.transparent = false;
-            if (node.isMesh) node.material.alphaTest = 0.5;
-        });
+            fbx.traverse((node) => {  
+                if (node.isMesh) node.frustumCulled = false;
+                if (node.isMesh) node.castShadow = true;
 
-        action_1 = mixer.clipAction( fbx.animations[0]);
-        actions.push(action_1);
-        action_1.play();
-        currentAction = mixer.clipAction(fbx.animations[0]);
+                if (node.isMesh) node.material.transparent = false;
+                if (node.isMesh) node.material.alphaTest = 0.5;
+            });
 
-        skeleton = new window['THREE'].SkeletonHelper( model );
-        skeleton.visible = false;
+            action_1 = mixer.clipAction( fbx.animations[0]);
+            actions.push(action_1);
+            action_1.play();
+            currentAction = mixer.clipAction(fbx.animations[0]);
 
-        scene.add( skeleton );
-        scene.add(model);
-        
-        // fbx.rotation.x += 1.6 //
-        // fbx.rotation.x += 0 
-        fbx.rotation.x += window["ROTATION_X"] //guild
-        load_animations();
+            skeleton = new window['THREE'].SkeletonHelper( model );
+            skeleton.visible = false;
 
-    }, 
-    function ( xhr ) {
-        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-    },
-    function ( error ) {
-        console.log( 'Error loading file 0' );
-    }   
+            scene.add( skeleton );
+            scene.add(model);
+            
+            // fbx.rotation.x += 1.6 //
+            // fbx.rotation.x += 0 
+            fbx.rotation.x += window["ROTATION_X"] //guild
+            load_animations();
 
-); 
+        }, 
+        function ( xhr ) {
+            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        function ( error ) {
+            console.log( 'Error loading file 0' );
+        }   
+
+    ); 
 
 
 function load_animations() {
@@ -389,7 +371,7 @@ function activateAllActions() {
 
 function switchAction () {
 
-    if (newAction != currentAction) {
+    if (newAction !== currentAction) {
 
         currentAction.fadeOut(0.3);
         newAction.reset();
@@ -397,17 +379,14 @@ function switchAction () {
         newAction.play();
         newAction.fadeIn(0.3);
         currentAction = newAction;
-
     }
-
 }
-
 
 // Toggle Skeleton
 
 const skeleton_button = document.getElementById("skeleton-button");
 skeleton_button.addEventListener("click", function (e) {
-    if (skeleton.visible == false) {
+    if (skeleton.visible === false) {
         skeleton.visible = true;
     }
 
@@ -581,21 +560,45 @@ function check_fullscreen() {
 setInterval(function(){ check_fullscreen();}, 1000); 
 
 function api() {
-    fetch(`http://localhost:8080/getitens`)
-    .then(resposta => resposta.json())
-    .then(json => {
-        const select = document.getElementById('object');
 
-        for (var i = 0; i < json.length; i++){
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = json[i].name_file;
-            opt.setAttribute("data-rotation", json[i].rotation_x);
-            opt.setAttribute("onclick", "doSomething(this);" );
+  const json = [
+    {
+      name_file: "aguardian90_8.fbx",
+      rotation_x:  1.6
+    },
 
-            select.appendChild(opt);
-        }
-    })
+    {
+      name_file: "empelium90_0.fbx",
+      rotation_x:  1.6
+    },
+
+    {
+      name_file: "guildflag90_1.fbx",
+      rotation_x:  1.6
+    },
+
+    {
+      name_file: "kguardian90_7.fbx",
+      rotation_x:  1.6
+    },
+    {
+      name_file: "treasurebox_2.fbx",
+      rotation_x:  0
+    },
+  ];
+
+  const select = document.getElementById('object');
+
+    for (var i = 0; i < json.length; i++){
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = json[i].name_file;
+        opt.setAttribute("data-rotation", json[i].rotation_x);
+        opt.setAttribute("onclick", "doSomething(this);" );
+
+        select.appendChild(opt);
+    }
+
 }
 
 

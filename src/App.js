@@ -1,119 +1,13 @@
 // "./3dmob/aguardian90_8.fbx"
 import React, { Component } from 'react';
-// import ReactThreeFbxViewer from './rpx';
-
-// import * as THREE from 'three'
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-// import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-// import Stats from 'three/examples/jsm/libs/stats.module'
-
-// const scene = new THREE.Scene()
-// scene.add(new THREE.AxesHelper(5))
-
-// const light = new THREE.PointLight()
-// light.position.set(0.8, 1.4, 1.0)
-// scene.add(light)
-
-// const ambientLight = new THREE.AmbientLight()
-// scene.add(ambientLight)
-
-// const camera = new THREE.PerspectiveCamera(
-//     75,
-//     window.innerWidth / window.innerHeight,
-//     0.1,
-//     1000
-// )
-// camera.position.set(10, 60, 60)
-
-// const renderer = new THREE.WebGLRenderer()
-// renderer.setSize(window.innerWidth, window.innerHeight)
-// document.body.appendChild(renderer.domElement)
-
-// const controls = new OrbitControls(camera, renderer.domElement)
-// controls.enableDamping = true
-// controls.target.set(0, 1, 0)
-
-// //const material = new THREE.MeshNormalMaterial()
-
-// const fbxLoader = new FBXLoader()
-// fbxLoader.load(
-//     './3dmob/aguardian90_8.fbx',
-//     (object) => {
-//         // object.traverse(function (child) {
-//         //     if ((child as THREE.Mesh).isMesh) {
-//         //         // (child as THREE.Mesh).material = material
-//         //         if ((child as THREE.Mesh).material) {
-//         //             ((child as THREE.Mesh).material as THREE.MeshBasicMaterial).transparent = false
-//         //         }
-//         //     }
-//         // })
-//         // object.scale.set(.01, .01, .01)
-
-//         const mixer = new THREE.AnimationMixer( object );
-//         const action_1 = mixer.clipAction( object.animations[0]);
-//         action_1.play();
-//         object.rotation.x = 4.6
-//         scene.add(object)
-//     },
-//     (xhr) => {
-//         console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-//     },
-//     (error) => {
-//         console.log(error)
-//     }
-// )
-
-// window.addEventListener('resize', onWindowResize, false)
-// function onWindowResize() {
-//     camera.aspect = window.innerWidth / window.innerHeight
-//     camera.updateProjectionMatrix()
-//     renderer.setSize(window.innerWidth, window.innerHeight)
-//     render()
-// }
-
-// const stats = Stats()
-// document.body.appendChild(stats.dom)
-
-// function animate() {
-//     requestAnimationFrame(animate)
-
-//     controls.update()
-
-//     render()
-
-//     stats.update()
-// }
-
-// function render() {
-//     renderer.render(scene, camera)
-// }
-
-// animate()
-
-// let fbxUrl = require('./3dmob/aguardian90_8.fbx');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import $ from 'jquery';
 
 
-
+$(document).ready(function(){
 
 let scene, camera, renderer, controls;
 
@@ -134,7 +28,9 @@ window.ROTATION_X = 1.6;
 window.THREE = THREE; 
 window.OrbitControls = OrbitControls;
 window.FBXLoader = FBXLoader;
-
+window.init = function () {
+    init();
+}
 
 function init () {
 
@@ -368,6 +264,9 @@ function activateAllActions() {
 
 }
 
+window.switchAction = function () {
+    switchAction();
+}
 
 function switchAction () {
 
@@ -594,6 +493,10 @@ function api() {
         opt.value = i;
         opt.innerHTML = json[i].name_file;
         opt.setAttribute("data-rotation", json[i].rotation_x);
+        opt.classList.add("option_select");
+
+        opt.setAttribute("id", "option_"+ i);
+
         opt.setAttribute("onclick", "doSomething(this);" );
 
         select.appendChild(opt);
@@ -601,11 +504,20 @@ function api() {
 
 }
 
+init();
+api();
 
-window.doSomething = function (params) {
+$('#object').change(function(){ 
+
+    var value = $(this).val();
+
+    $('#option_'+value)
+    console.log(value, $('#option_'+value).html(), $('#option_'+value).data().rotation );
+
+
     document.body.setAttribute("loading","")
-    window["NAME_FILE"] = params.innerHTML;
-    window["ROTATION_X"] = params.dataset.rotation;
+    window["NAME_FILE"] = $('#option_'+value).html();
+    window["ROTATION_X"] = $('#option_'+value).data().rotation;
 
     
     document.getElementById("animation-2").style.display = "block";
@@ -619,16 +531,15 @@ window.doSomething = function (params) {
     document.getElementById("animation-4").checked = false;
     document.getElementById("animation-5").checked = false;
 
+    // remove ultimo canvas
     const element = document.getElementsByTagName("canvas")[0];
     element.remove()
+    $( "canvas" ).remove();
 
+    // restart
     init();
-
-}
-
-init();
-api();
-// });
+});
+});
 export default class App extends Component {
 
   render () {

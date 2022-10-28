@@ -2,7 +2,7 @@
 ## Converted GR2 to fbx. Animation, texture and minor fixes
 
 ## Start Project
-#### prerequisite
+#### prerequisite/necessary
 npm installed
 ````
 npm 8.1.0
